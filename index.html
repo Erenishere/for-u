@@ -3,19 +3,282 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Do You Love Me? 💕</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Roses Day Surprise for My Chanda ❤️</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Arial', cursive;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+      position: relative;
+    }
+
+    #message {
+      font-size: 24px;
+      color: #ff3366;
+      margin: 20px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border: 2px solid #ff3366;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      background: #ff3366;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .no-move {
+      position: absolute;
+    }
+
+    .message-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 90%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+      font-size: 18px;
+      color: #ff3366;
+      gap: 15px;
+    }
+
+    .message-box img {
+      width: 100px;
+      border-radius: 10px;
+    }
+
+    .rose {
+      position: absolute;
+      font-size: 30px;
+      opacity: 0;
+      animation: fall 6s linear forwards;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .love-note {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      color: white;
+      z-index: 1000;
+      max-width: 80%;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+
+    .heart-shape {
+      position: absolute;
+      background-color: #8B0000;
+      transform: rotate(-45deg);
+      animation: heartbeat 1.5s infinite alternate;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+
+    .heart-shape:before,
+    .heart-shape:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: inherit;
+      border-radius: 50%;
+    }
+
+    .heart-shape:before {
+      top: -50%;
+      left: 0;
+    }
+
+    .heart-shape:after {
+      left: 50%;
+      top: 0;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: rotate(-45deg) scale(1); }
+      100% { transform: rotate(-45deg) scale(1.1); }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Do You Love Me? 💕</h1>
-    <p class="quote">"You are my today and all of my tomorrows." 💌</p>
-    <div class="buttons">
-      <button id="yesButton">Yes 😍</button>
-      <button id="noButton">No 😒</button>
-    </div>
-    <div class="teddy-bear">🧸</div>
+  <div class="container" id="mainContainer">
+    <p id="message">What is your name, my cutie? 🌹</p>
+    <input type="text" id="nameInput" placeholder="Type here...">
+    <button onclick="checkName()">Submit</button>
   </div>
-  <script src="app.js"></script>
+
+  <div id="noMessage" class="message-box" style="display: none;"></div>
+
+  <script>
+    function checkName() {
+      const name = document.getElementById('nameInput').value.toLowerCase().trim();
+      const container = document.getElementById('mainContainer');
+
+      if (name === 'bisma') {
+        container.innerHTML = `
+          <p id="message">Yes, my love! What  I call you? ❤️</p>
+          <input type="text" id="nickname" placeholder="Your nickname...">
+          <button onclick="checkNickname()">Submit</button>
+        `;
+      } else {
+        alert("This is not for you, it is for my cutie! ❤︍");
+      }
+    }
+
+    function checkNickname() {
+      const nickname = document.getElementById('nickname').value.toLowerCase().trim();
+      const container = document.getElementById('mainContainer');
+      
+      if (nickname === 'chanda' || nickname === 'mano') {
+        container.innerHTML = `
+          <p>I LOVE YOU, MY ${nickname.toUpperCase()}! 🐻🌹</p>
+          <div>
+            <button onclick="handleLove()">I LOVE YOU TOO 😘</button>
+          </div>
+          <div>
+            <button id="noButton" onclick="handleNo()">No 😒</button>
+          </div>
+        `;
+      } else {
+        alert("That’s not what I call you, baby! ❤️");
+      }
+    }
+
+    let noClickCount = 0;
+    const messages = [
+      "Plzzz plzzz give me a chance my mano plzx",
+      "Mera munna aesa na karen na",
+      "Apky pas bs aik hi option hy mera munna ❣️"
+    ];
+
+    const images = [
+      "1.jpeg",
+      "2.png", // دوسری تصویر
+      "3.gif",
+      "4.png"  // تیسری تصویر
+    ];
+
+    function handleNo() {
+      let noMessage = document.getElementById('noMessage');
+      let noButton = document.getElementById('noButton');
+
+      if (noClickCount < messages.length) {
+        noMessage.innerHTML = `
+          <p>${messages[noClickCount]}</p>
+          <img src="${images[noClickCount]}" alt="Sad Image">
+        `;
+      } else {
+        noMessage.innerHTML = `
+          <p>Ab apke pas koi option nahi, bs "I LOVE YOU" bol do! ❤️</p>
+        `;
+        noButton.classList.add('no-move');
+        moveNoButton();
+      }
+
+      noMessage.style.display = 'flex';
+      noClickCount++;
+    }
+
+    function moveNoButton() {
+      let noButton = document.getElementById('noButton');
+      noButton.style.position = 'absolute';
+      noButton.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+      noButton.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+    }
+
+    function handleLove() {
+      const container = document.getElementById('mainContainer');
+      document.body.style.background = '#000';
+      container.style.display = 'none';
+
+      // Create love note
+      const loveNote = document.createElement('div');
+      loveNote.className = 'love-note';
+      loveNote.innerHTML = `
+        <p>It’s Roses Day, my Chanda! 🌹</p>
+        <p>Meri pyari si mano , happy roses day lkn maine apko kabhi nhi diya..
+          lkn koi bt nhi na mano baby i tried to do something new i know i know meri jaan yeh kuch bhi nhi hy 💫</p>
+        <p>I love you mera munna🌹 i want to make u smile and happy i hope meri jaan ko yeh acha laga hoga </p>
+        <p><em>"Phool mhi desta na tu isiliye meri taraf sy yeh pta hy baby maine na animation sy rose bnana chah raha tha manhoos ban hi nhi pa raha sorrryy
+          meri pyari si jaan im so sorry kabhi kabhi ajeeb behave krdeta hun im sorry apko udass krny kai liye. mera bachaaa hen ." 💌</em></p>
+      `;
+      document.body.appendChild(loveNote);
+
+      // Create multiple hearts
+      createHearts();
+    }
+
+    function createHearts() {
+      const numHearts = 30;
+      for (let i = 0; i < numHearts; i++) {
+        setTimeout(() => {
+          createHeart();
+        }, i * 100); // Delay each heart creation by 100ms
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart-shape';
+
+      const size = Math.random() * 80 + 20; // Random size between 20px and 100px
+      const left = Math.random() * window.innerWidth; // Random horizontal position
+      const top = Math.random() * window.innerHeight; // Random vertical position
+
+      heart.style.width = `${size}px`;
+      heart.style.height = `${size}px`;
+      heart.style.left = `${left}px`;
+      heart.style.top = `${top}px`;
+
+      document.body.appendChild(heart);
+    }
+    const images2 = [
+      "bear1.png",
+      "f1.png", // دوسری تصویر
+      "f2.jpeg",
+      "f3..png"  // تیسری تصویر
+    ];
+    const left1 = Math.random() * window.innerWidth; 
+      const top1 = Math.random() * window.innerHeight; 
+      document.body.appendChild(images2);
+  </script>
 </body>
 </html>
